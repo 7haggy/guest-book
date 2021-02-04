@@ -2,18 +2,10 @@
     <div id="app">
         <div class="container">
             <the-navbar />
+            {{ comments }}
             <h1 class="title">Список отзывов</h1>
             <div class="comment-group">
-                <drop-list
-                    :items="comments"
-                    @reorder="$event.apply(comments)"
-                    @insert="
-                        (event) => {
-                            comments.splice(event.index, 0, event.data);
-                        }
-                    "
-                    mode="cut"
-                >
+                <drop-list :items="comments" @reorder="$event.apply(comments)">
                     <template v-slot:item="{ item }">
                         <drag
                             :key="item.id"
@@ -119,8 +111,10 @@
                             variant: "success",
                         });
                     } else {
-                        this.comments.splice(0, 0, {
-                            id: this.comments.length + 1,
+                        this.comments.unshift({
+                            id: this.comments.reduce((sum, curr) => {
+                                return sum + curr.id;
+                            }, 1),
                             userName: this.activeUser ? this.activeUser.login : "Анонимно",
                             text: this.text.val,
                             userId: this.activeUser ? this.activeUser.login : null,
