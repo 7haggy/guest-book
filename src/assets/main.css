@@ -1,0 +1,11 @@
+.color-red {
+    color: red;
+}
+
+.error {
+    border-color: red !important;
+}
+
+.dnd-drag:nth-child(odd) .comment-block {
+    background: #f5f5f6;
+}
