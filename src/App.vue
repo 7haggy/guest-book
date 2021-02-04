@@ -2,7 +2,6 @@
     <div id="app">
         <div class="container">
             <the-navbar />
-            {{ comments }}
             <h1 class="title">Список отзывов</h1>
             <div class="comment-group">
                 <drop-list :items="comments" @reorder="$event.apply(comments)">
